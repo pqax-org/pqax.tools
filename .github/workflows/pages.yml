@@ -1,0 +1,43 @@
+name: Pages
+
+# Deploys pqax.tools to GitHub Pages on every push to main. The published folder is _site/, which scripts/build.mjs
+# assembles from index.html and the packages @pqax/pqax and @pqax/views installed from npm at the versions of
+# package.json; built files are not committed. The custom domain and HTTPS are set in the repository settings, Pages,
+# with the source "GitHub Actions".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Build the site
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v5
