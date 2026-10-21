@@ -1,0 +1,14 @@
+{
+  "name": "pqax.tools",
+  "private": true,
+  "description": "The site of pqax.tools: the storage views of PQAX, built from the published npm packages.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "@pqax/pqax": "0.2.0",
+    "@pqax/views": "0.2.0"
+  }
+}
