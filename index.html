@@ -7,21 +7,23 @@
 <meta name="description" content="Open a PQAX file, or the footprint inside a VPAX file, and see where the bytes of each table go. The file is read in the browser and nothing is uploaded.">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://pqax.tools/">
-<link rel="icon" href="data:,">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="lib/views/styles.css">
 <style>
-:root { --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --line: #d0d7de; --accent: #0a5aa6; --code-bg: #f6f8fa; --error: #b42318; }
+:root { --bg: #ffffff; --fg: #1e293b; --muted: #64748b; --line: #cbd5e1; --accent: #2563eb; --code-bg: #f1f5f9; --error: #b42318; }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --line: #3d444d; --accent: #79b8ff; --code-bg: #161b22; --error: #ff8a80; }
+  :root { --bg: #0f172a; --fg: #e2e8f0; --muted: #94a3b8; --line: #334155; --accent: #5b9cff; --code-bg: #1e293b; --error: #ff8a80; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 -apple-system, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif; }
 main { max-width: 64rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
 header { margin-bottom: 1.5rem; }
-.wordmark { font-size: 2.2rem; font-weight: 800; letter-spacing: .12em; margin: 0; line-height: 1; }
-.wordmark a { color: inherit; }
-.wordmark a:hover { text-decoration: none; }
-.wordmark span { font-weight: 400; letter-spacing: .04em; color: var(--muted); }
+.wordmark { margin: 0; }
+.wordmark a { display: inline-block; color: inherit; }
+.wordmark svg { display: block; height: 2.4rem; width: auto; }
+.wordmark .suffix { fill: var(--muted); }
 .tagline { font-size: 1.15rem; margin: .5rem 0 0; color: var(--muted); }
 h2 { font-size: 1.2rem; margin: 2.4rem 0 .4rem; }
 p { margin: .6rem 0; }
@@ -49,7 +51,7 @@ footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line);
 .pqax-view { --pqax-gap: var(--bg); --pqax-focus: var(--accent); --pqax-font: inherit; }
 @media (max-width: 40rem) {
   main { padding-top: 1.5rem; }
-  .wordmark { font-size: 1.9rem; }
+  .wordmark svg { height: 2rem; }
 }
 </style>
 <script type="importmap">
@@ -59,7 +61,36 @@ footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line);
 <body>
 <main>
 <header>
-<p class="wordmark"><a href="./">PQAX <span>tools</span></a></p>
+<p class="wordmark"><a href="./" aria-label="PQAX tools"><svg role="img" viewBox="0 0 315.15 38.4">
+  <title>PQAX tools</title>
+  <g transform="translate(-2.743 -2.743) scale(0.68571)">
+    <g fill="#3C7AFE">
+      <rect x="4" y="4" width="24" height="12"/>
+      <rect x="32" y="4" width="8" height="12"/>
+      <path d="M44 4H48L60 16H44Z"/>
+      <rect x="4" y="20" width="20" height="12"/>
+      <rect x="28" y="20" width="12" height="12"/>
+      <rect x="44" y="20" width="16" height="12"/>
+      <rect x="4" y="36" width="28" height="12"/>
+      <rect x="36" y="36" width="8" height="12"/>
+      <rect x="48" y="36" width="12" height="12"/>
+    </g>
+    <rect fill="#EA580C" x="4" y="52" width="56" height="8"/>
+  </g>
+  <g fill="currentColor" transform="translate(54.4 2.698) scale(0.32)">
+    <path d="M0 101.57V1.57H50.14Q60 1.57 67.57 5.57Q75.14 9.57 79.43 16.71Q83.71 23.86 83.71 33Q83.71 42 79.36 49Q75 56 67.43 60Q59.86 64 50.14 64H20.71V101.57ZM20.71 46.71H47.86Q54.57 46.71 58.64 43Q62.71 39.29 62.71 33.14Q62.71 26.86 58.64 23.14Q54.57 19.43 47.86 19.43H20.71Z"/>
+    <path d="M181.86 106.43 175.14 98.14Q170 100.57 164.29 101.86Q158.57 103.14 152.29 103.14Q141.29 103.14 131.64 99.21Q122 95.29 114.79 88.21Q107.57 81.14 103.5 71.79Q99.43 62.43 99.43 51.57Q99.43 40.71 103.5 31.36Q107.57 22 114.79 14.93Q122 7.86 131.64 3.93Q141.29 0 152.29 0Q163.43 0 173.07 3.93Q182.71 7.86 189.93 14.93Q197.14 22 201.14 31.36Q205.14 40.71 205.14 51.57Q205.14 62.29 201.14 71.71Q197.14 81.14 190 88L200 100.43ZM152.29 84.14Q157.71 84.14 162.43 82.14L151.57 68.71L169.71 62.71L177.14 71.86Q180.29 67.86 182.14 62.64Q184 57.43 184 51.57Q184 42.29 179.79 34.93Q175.57 27.57 168.43 23.29Q161.29 19 152.29 19Q143.43 19 136.21 23.29Q129 27.57 124.86 34.93Q120.71 42.29 120.71 51.57Q120.71 60.86 124.86 68.21Q129 75.57 136.21 79.86Q143.43 84.14 152.29 84.14Z"/>
+    <path d="M210.29 101.57 251.43 1.57H275.29L316 101.57H293.57L283.43 75.43H242.14L231.86 101.57ZM248.57 58.71H277.14L262.86 21.86Z"/>
+    <path d="M325.14 101.57 363.29 49.86 327.14 1.57H351.86L375.57 34.43L399.14 1.57H423L387.43 49.86L426 101.57H401.29L375.14 65.29L349 101.57Z"/>
+  </g>
+  <g class="suffix" transform="translate(199.91 2.698) scale(0.32)">
+    <path d="M40.43 102.71Q15.29 102.71 15.29 80.57V43.57H0V27.14H15.29V8.14L34.86 3.71V27.14H56.14V43.57H34.86V76.57Q34.86 81.86 37.14 84Q39.43 86.14 45.14 86.14Q50.43 86.14 55.57 84.43V100.57Q52.43 101.43 48.07 102.07Q43.71 102.71 40.43 102.71Z"/>
+    <path d="M107.14 103Q96 103 87 97.86Q78 92.71 72.71 84Q67.43 75.28 67.43 64.43Q67.43 53.57 72.71 44.78Q78 36 87 30.86Q96 25.71 107.14 25.71Q118.29 25.71 127.29 30.86Q136.29 36 141.57 44.78Q146.86 53.57 146.86 64.43Q146.86 75.28 141.57 84Q136.29 92.71 127.29 97.86Q118.29 103 107.14 103ZM107.14 86Q113 86 117.64 83.14Q122.29 80.28 125.07 75.36Q127.86 70.43 127.86 64.43Q127.86 58.28 125.07 53.43Q122.29 48.57 117.57 45.64Q112.86 42.71 107.14 42.71Q101.43 42.71 96.71 45.64Q92 48.57 89.29 53.43Q86.57 58.28 86.57 64.43Q86.57 70.43 89.29 75.36Q92 80.28 96.71 83.14Q101.43 86 107.14 86Z"/>
+    <path d="M201.14 103Q190 103 181 97.86Q172 92.71 166.71 84Q161.43 75.28 161.43 64.43Q161.43 53.57 166.71 44.78Q172 36 181 30.86Q190 25.71 201.14 25.71Q212.29 25.71 221.29 30.86Q230.29 36 235.57 44.78Q240.86 53.57 240.86 64.43Q240.86 75.28 235.57 84Q230.29 92.71 221.29 97.86Q212.29 103 201.14 103ZM201.14 86Q207 86 211.64 83.14Q216.29 80.28 219.07 75.36Q221.86 70.43 221.86 64.43Q221.86 58.28 219.07 53.43Q216.29 48.57 211.57 45.64Q206.86 42.71 201.14 42.71Q195.43 42.71 190.71 45.64Q186 48.57 183.29 53.43Q180.57 58.28 180.57 64.43Q180.57 70.43 183.29 75.36Q186 80.28 190.71 83.14Q195.43 86 201.14 86Z"/>
+    <path d="M258.86 101.57V1.57L278.43 -1.72V101.57Z"/>
+    <path d="M327.57 103Q317.29 103 308.5 100.36Q299.71 97.71 293.43 92.71L303.14 79.71Q315.86 88.28 327.29 88.28Q333.86 88.28 337.79 86.07Q341.71 83.86 341.71 80.28Q341.71 74.71 332.43 73.28L318.14 71.14Q295.57 67.71 295.57 49.43Q295.57 38.71 303.93 32.28Q312.29 25.86 326.57 25.86Q343.14 25.86 357.14 35.14L347.71 47.86Q335.86 40.57 324.71 40.57Q319.43 40.57 316.21 42.57Q313 44.57 313 47.86Q313 51 315.29 52.64Q317.57 54.28 323.14 55L337.43 57.14Q348.43 58.71 354.29 64.21Q360.14 69.71 360.14 78.43Q360.14 85.57 355.86 91.07Q351.57 96.57 344.21 99.78Q336.86 103 327.57 103Z"/>
+  </g>
+</svg></a></p>
 <p class="tagline">Storage views of a footprint: where the bytes of each table go.</p>
 </header>
 
