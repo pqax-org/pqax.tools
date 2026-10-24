@@ -8,7 +8,7 @@
     "serve": "node scripts/serve.mjs"
   },
   "dependencies": {
-    "@pqax/pqax": "0.2.1",
-    "@pqax/views": "0.2.1"
+    "@pqax/pqax": "0.2.2",
+    "@pqax/views": "0.2.2"
   }
 }
